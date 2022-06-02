@@ -15,8 +15,7 @@ models = tf.keras.models
 class_names = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Load
-(train_images, train_labels), (test_images,
-                               test_labels) = datasets.mnist.load_data()
+(train_images, train_labels), (test_images, test_labels) = datasets.mnist.load_data()
 
 
 # Normalize
@@ -38,14 +37,12 @@ model.add(layers.Dense(56, activation='relu'))
 model.add(layers.Dense(10))
 
 # Compile
-model.compile(optimizer='adam',
-              loss=tf.keras.losses.SparseCategoricalCrossentropy(
-                  from_logits=True),
+model.compile(optimizer='adam', 
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
 # Fit
-model.fit(train_images, train_labels, epochs=2,
-          validation_data=(test_images, test_labels))
+model.fit(train_images, train_labels, epochs=2, validation_data=(test_images, test_labels))
 
 
 # Evaluate
@@ -65,6 +62,5 @@ while True:
     test_label = test_labels[number]
     predicted_index = model.predict(np.array([test_image]))
     predicted_class = class_names[np.argmax(predicted_index)]
-    print("Expected " + str(test_label) +
-          " - Got " + str(predicted_class))
+    print("Expected " + str(test_label) + " - Got " + str(predicted_class))
     showMe(test_image, test_label)
